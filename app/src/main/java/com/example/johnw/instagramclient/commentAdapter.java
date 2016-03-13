@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextPaint;
-import android.text.format.DateUtils;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.util.Log;
@@ -14,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.makeramen.roundedimageview.RoundedTransformationBuilder;
@@ -24,56 +22,34 @@ import com.squareup.picasso.Transformation;
 import java.util.List;
 
 /**
- * Created by johnw on 3/12/2016.
+ * Created by JohnWhisker on 3/13/16.
  */
-public class InstagramPhotoAdater extends ArrayAdapter<InstagramPhoto> {
-    public InstagramPhotoAdater(Context context, List<InstagramPhoto> objects) {
+public class commentAdapter extends ArrayAdapter<Comment> {
+   public commentAdapter(Context context, List<Comment> objects) {
 
         super(context,android.R.layout.simple_list_item_1,objects);
     }
-
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        InstagramPhoto photo = getItem(position);
-        if(convertView == null){
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_photo,parent,false);
+        Comment comment1 = getItem(position);
+        if (convertView == null) {
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_comment, parent, false);
         }
-        TextView tvCaption = (TextView) convertView.findViewById(R.id.tvCaption);
-        TextView tvUserName = (TextView) convertView.findViewById(R.id.tvUsername);
-        TextView tvlike = (TextView) convertView.findViewById(R.id.tvLikes);
-        TextView tvTime = (TextView) convertView.findViewById(R.id.tvTime);
-        tvTime.setText("\uD83D\uDD52 " + DateUtils.getRelativeTimeSpanString(photo.datetime * 1000).toString());
-        ImageView ivAvartar = (ImageView) convertView.findViewById(R.id.ivAvatar);
-        ImageView ivPhoto = (ImageView) convertView.findViewById(R.id.ivPhoto);
+        TextView timestamnp = (TextView)convertView.findViewById(R.id.tvTime);
+        ImageView userpicture = (ImageView) convertView.findViewById(R.id.ivcommentAva);
+        TextView usercomment = (TextView) convertView.findViewById(R.id.tvCommentUser);
+        TextView comment = (TextView) convertView.findViewById(R.id.tvComment);
         Transformation transformation = new RoundedTransformationBuilder()
                 .borderColor(Color.BLACK)
                 .borderWidthDp(0)
                 .cornerRadiusDp(30)
                 .oval(false)
                 .build();
-        tvCaption.setText(photo.caption);
-        setTags(tvCaption,photo.caption);
-        tvlike.setText("\uD83D\uDC99 " + String.valueOf(photo.likeCount) + " likes");
-        tvUserName.setText(photo.username);
-        ivAvartar.setImageResource(0);
-        ivPhoto.setImageResource(0);
-        final ProgressBar progressBar = (ProgressBar) convertView.findViewById(R.id.Loading);
-        progressBar.setVisibility(View.VISIBLE);
-        Picasso.with(getContext()).load(photo.imageurl).into(ivPhoto, new com.squareup.picasso.Callback() {
-            @Override
-            public void onSuccess() {
-                if (progressBar != null) {
-                    progressBar.setVisibility(View.GONE);
-                }
-            }
-
-            @Override
-        public void onError(){
-
-            }
-        });
-        Picasso.with(getContext()).load(photo.avaurl).fit().transform(transformation).into(ivAvartar);
-
+        usercomment.setText(comment1.username);
+        timestamnp.setText("\uD83D\uDD52 " + android.text.format.DateUtils.getRelativeTimeSpanString(comment1.created_time * 1000).toString());
+        comment.setText(comment1.comment);
+        setTags(comment,comment1.comment);
+        Picasso.with(getContext()).load(comment1.avaurl).fit().transform(transformation).into(userpicture);
         return convertView;
     }
     public void setTags(TextView pTextView, String pTagString) {
