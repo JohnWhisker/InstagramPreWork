@@ -37,8 +37,8 @@ The following **optional** features are implemented:
 ## Video Walkthrough 
 
 Here's a walkthrough of implemented user stories:
+<iframe class="imgur-embed" width="100%" height="937" frameborder="0" src="http://i.imgur.com/bfUNtrr.gifv#embed"></iframe>
 
-<img src='http://imgur.com/bfUNtrr.gifv'  title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
