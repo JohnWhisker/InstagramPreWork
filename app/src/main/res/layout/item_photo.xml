@@ -43,7 +43,7 @@
             android:text="Time"
             android:id="@+id/tvTime"
             android:textAlignment="textEnd"
-            android:textColor="#b9bbbd" />
+            android:textColor="#adadad" />
     </LinearLayout>
 
     <ImageView
@@ -66,7 +66,7 @@
         android:layout_height="wrap_content"
         android:text="Captions"
         android:id="@+id/tvCaption"
-        android:textSize="20sp"
+        android:textSize="13dp"
         android:maxLines="3"
         android:ellipsize="end"
         android:textColor="#b6b8bb"

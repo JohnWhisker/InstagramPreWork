@@ -37,7 +37,6 @@ public class photoActivity extends AppCompatActivity {
         aPhotos = new InstagramPhotoAdater(this, photos);
         lvPhoto = (ListView) findViewById(R.id.lvPhotos);
         lvPhoto.setAdapter(aPhotos);
-
         swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
         // Setup refresh listener which triggers new data loading
 
@@ -59,6 +58,12 @@ public class photoActivity extends AppCompatActivity {
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
+        lvPhoto.setOnScrollListener(new InfiniteScrollListener(5) {
+            @Override
+            public void loadMore(int page, int totalItemsCount) {
+                fletchPhotos();
+            }
+        });
         fletchPhotos();
         setupListViewListener();
     }

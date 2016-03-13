@@ -23,20 +23,22 @@ The following **required** functionality is completed:
 The following **optional** features are implemented:
 
 * [X] Add pull-to-refresh for popular stream with SwipeRefreshLayout
-* [ ] Show latest comment for each photo (bonus: show last 2 comments) 
+* [X] Show latest comment for each photo (bonus: show last 2 comments) 
 * [X] Display each user profile image using a RoundedImageView
 * [X] Display a nice loading bar for each image during loading (read more about Picasso) 
 * [X] Improve the user interface through styling and coloring
-* [ ] Allow user to view all comments for an image within a separate activity or dialog fragment
+* [X] Allow user to view all comments for an image within a separate activity or dialog fragment
+* [X] Infinite scroll
 * [ ] Allow video posts to be played in full-screen using the VideoView
 * [ ] Apply the popular Butterknife annotation library to reduce view boilerplate
+
 
 
 ## Video Walkthrough 
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/L2AVAVX.gif'  title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='http://imgur.com/bfUNtrr.gif'  title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
