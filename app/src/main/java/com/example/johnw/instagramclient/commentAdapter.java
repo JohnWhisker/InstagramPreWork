@@ -85,7 +85,6 @@ public class commentAdapter extends ArrayAdapter<Comment> {
                 }
             }
         }
-
         pTextView.setMovementMethod(LinkMovementMethod.getInstance());
         pTextView.setText(string);
     }

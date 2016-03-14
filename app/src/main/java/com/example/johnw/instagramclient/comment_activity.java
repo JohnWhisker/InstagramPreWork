@@ -51,8 +51,6 @@ public class comment_activity extends AppCompatActivity {
         lvcomment.setAdapter(AComment);
         fletchComment();
         mediaInfomation();
-
-
     }
     public void OnClick(View v){
         Intent intent = new Intent(this,Showprofile.class);
@@ -68,9 +66,7 @@ public class comment_activity extends AppCompatActivity {
 
                 JSONArray PhotosJson = null;
                 try {
-
                    // PhotosJson = response.getJSONArray("data");
-
                    // Log.d("debug", "JSON " + PhotosJson.toString());
                     JSONObject photoJ = response.getJSONObject("data");
                     Log.d("debug", "JSON " + photoJ.toString());
@@ -104,12 +100,8 @@ public class comment_activity extends AppCompatActivity {
                         Picasso.with(comment_activity.this).load(thismedia.imageurl).into(ivMedia);
                         Picasso.with(comment_activity.this).load(thismedia.avaurl).fit().transform(transformation).into(ivavamedia);
                     }catch (Exception e){e.printStackTrace();}
-                }catch (JSONException e){e.printStackTrace();};
-
-
-
+                }catch (JSONException e){e.printStackTrace();}
             }
-
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
 
@@ -139,7 +131,6 @@ public class comment_activity extends AppCompatActivity {
                 }
 
             }
-
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
 
