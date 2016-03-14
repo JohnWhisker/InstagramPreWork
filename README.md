@@ -29,6 +29,7 @@ The following **optional** features are implemented:
 * [X] Improve the user interface through styling and coloring
 * [X] Allow user to view all comments for an image within a separate activity or dialog fragment
 * [X] Infinite scroll
+* [X] User can view post's user's profiles
 * [ ] Allow video posts to be played in full-screen using the VideoView
 * [ ] Apply the popular Butterknife annotation library to reduce view boilerplate
 

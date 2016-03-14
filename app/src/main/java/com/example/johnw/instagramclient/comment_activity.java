@@ -1,10 +1,12 @@
 package com.example.johnw.instagramclient;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.format.DateUtils;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -27,7 +29,7 @@ public class comment_activity extends AppCompatActivity {
 
     public static final String CLIENT_ID = "e05c462ebd86446ea48a5af73769b602";
     private ArrayList<Comment> Comment;
-    String id;
+    String id,userid;
     InstagramPhoto thismedia;
     private commentAdapter AComment;
     @Override
@@ -50,8 +52,13 @@ public class comment_activity extends AppCompatActivity {
         fletchComment();
         mediaInfomation();
 
-    }
 
+    }
+    public void OnClick(View v){
+        Intent intent = new Intent(this,Showprofile.class);
+        intent.putExtra("id", userid);
+        startActivity(intent);
+    }
     public void mediaInfomation(){
         String url = "https://api.instagram.com/v1/media/"+id+"?client_id="+CLIENT_ID;
         AsyncHttpClient client2 = new AsyncHttpClient();
@@ -73,6 +80,7 @@ public class comment_activity extends AppCompatActivity {
                     thismedia.imageurl = photoJ.getJSONObject("images").getJSONObject("standard_resolution").getString("url");
                     thismedia.likeCount = photoJ.getJSONObject("likes").getInt("count");
                     thismedia.caption = photoJ.getString("caption");
+                    userid = photoJ.getJSONObject("user").getString("id");
                     Log.d("debug",thismedia.username+ " "+thismedia.avaurl);
                     ImageView ivavamedia = (ImageView) findViewById(R.id.ivpostava);
                     TextView tvpostname = (TextView) findViewById(R.id.tvpostname);
