@@ -21,7 +21,7 @@ import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
 
-public class photoActivity extends AppCompatActivity {
+public class PhotoActivity extends AppCompatActivity {
     private SwipeRefreshLayout swipeContainer;
     public static final String CLIENT_ID = "e05c462ebd86446ea48a5af73769b602";
     private ArrayList<InstagramPhoto> photos;
@@ -49,7 +49,7 @@ public class photoActivity extends AppCompatActivity {
 
                 // once the network request has completed successfully.
 
-                fetchTimelineAsync(0);
+                fetchTimelineAsync(true);
             }
         });
         // Configure the refreshing colors
@@ -61,24 +61,25 @@ public class photoActivity extends AppCompatActivity {
         lvPhoto.setOnScrollListener(new InfiniteScrollListener(5) {
             @Override
             public void loadMore(int page, int totalItemsCount) {
-                fletchPhotos();
+                fetchTimelineAsync(false);
             }
         });
-        fletchPhotos();
+        fetchTimelineAsync(false);
         setupListViewListener();
     }
-    public void fetchTimelineAsync(int page) {
+    public void fetchTimelineAsync(boolean clear) {
         // Send the network request to fetch the updated data
 
         // `client` here is an instance of Android Async HTTP
         AsyncHttpClient client2 = new AsyncHttpClient();
         String url = "https://api.instagram.com/v1/media/popular?client_id="+CLIENT_ID;
+        if(clear){
         client2.get(url, null, new JsonHttpResponseHandler() {
+
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 JSONArray photosJSON = null;
                 try {
-
                     photosJSON = response.getJSONArray("data");
                     photos.clear();
                     for (int i = 0; i < photosJSON.length(); i++) {
@@ -101,49 +102,26 @@ public class photoActivity extends AppCompatActivity {
                 aPhotos.notifyDataSetChanged();
             }
 
+
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
 
             }
         });
+        }
+        else {client2.get(url, null, new JsonHttpResponseHandler() {
 
-        swipeContainer.setRefreshing(false);
-    }
-
-
-    private void setupListViewListener() {
-        final Context context = this;
-
-        lvPhoto.setOnItemClickListener(
-                new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                        Intent intent = new Intent(context, comment_activity.class);
-                       Log.v("ID photo",photos.get(position).id);
-                        intent.putExtra("id", photos.get(position).id);
-                        startActivity(intent);
-
-                    }
-                }
-        );
-    }
-    public void fletchPhotos(){
-        //https://api.instagram.com/v1/media/popular?access_token=ACCESS-TOKEN
-        //e05c462ebd86446ea48a5af73769b602
-
-        AsyncHttpClient client = new AsyncHttpClient();
-        String url = "https://api.instagram.com/v1/media/popular?client_id="+CLIENT_ID;
-        client.get(url, null, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 JSONArray photosJSON = null;
                 try {
                     photosJSON = response.getJSONArray("data");
+                    photos.clear();
                     for (int i = 0; i < photosJSON.length(); i++) {
                         JSONObject photoJ = photosJSON.getJSONObject(i);
                         InstagramPhoto photo = new InstagramPhoto();
                         photo.id = photoJ.getString("id");
+                        Log.d("debug", (photo.id == null ? "null" : photo.id));
                         photo.username = photoJ.getJSONObject("user").getString("username");
                         photo.caption = photoJ.getJSONObject("caption").getString("text");
                         photo.datetime = photoJ.getJSONObject("caption").getLong("created_time");
@@ -159,11 +137,33 @@ public class photoActivity extends AppCompatActivity {
                 aPhotos.notifyDataSetChanged();
             }
 
+
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
 
             }
-        });
+        });}
 
+        swipeContainer.setRefreshing(false);
     }
+
+
+    private void setupListViewListener() {
+        final Context context = this;
+
+        lvPhoto.setOnItemClickListener(
+                new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                        Intent intent = new Intent(context, CommentActivity.class);
+                       Log.v("ID photo",photos.get(position).id);
+                        intent.putExtra("id", photos.get(position).id);
+                        startActivity(intent);
+
+                    }
+                }
+        );
+    }
+
 }

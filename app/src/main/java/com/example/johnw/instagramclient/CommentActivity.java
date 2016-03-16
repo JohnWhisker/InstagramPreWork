@@ -25,13 +25,13 @@ import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
 
-public class comment_activity extends AppCompatActivity {
+public class CommentActivity extends AppCompatActivity {
 
     public static final String CLIENT_ID = "e05c462ebd86446ea48a5af73769b602";
     private ArrayList<Comment> Comment;
     String id,userid;
     InstagramPhoto thismedia;
-    private commentAdapter AComment;
+    private CommentAdapter AComment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,14 +46,14 @@ public class comment_activity extends AppCompatActivity {
             }
         }
         Comment = new ArrayList<Comment>();
-        AComment = new commentAdapter(this, Comment);
+        AComment = new CommentAdapter(this, Comment);
         ListView lvcomment = (ListView) findViewById(R.id.lvComment);
         lvcomment.setAdapter(AComment);
         fletchComment();
         mediaInfomation();
     }
     public void OnClick(View v){
-        Intent intent = new Intent(this,Showprofile.class);
+        Intent intent = new Intent(this,ShowProfile.class);
         intent.putExtra("id", userid);
         startActivity(intent);
     }
@@ -97,8 +97,8 @@ public class comment_activity extends AppCompatActivity {
                                 .cornerRadiusDp(30)
                                 .oval(false)
                                 .build();
-                        Picasso.with(comment_activity.this).load(thismedia.imageurl).into(ivMedia);
-                        Picasso.with(comment_activity.this).load(thismedia.avaurl).fit().transform(transformation).into(ivavamedia);
+                        Picasso.with(CommentActivity.this).load(thismedia.imageurl).into(ivMedia);
+                        Picasso.with(CommentActivity.this).load(thismedia.avaurl).fit().transform(transformation).into(ivavamedia);
                     }catch (Exception e){e.printStackTrace();}
                 }catch (JSONException e){e.printStackTrace();}
             }

@@ -10,15 +10,15 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".photoActivity">
+        <activity android:name=".PhotoActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".comment_activity" />
-        <activity android:name=".Showprofile"></activity>
+        <activity android:name=".CommentActivity" />
+        <activity android:name=".ShowProfile"></activity>
     </application>
 
 </manifest>

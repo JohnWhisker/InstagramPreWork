@@ -14,10 +14,10 @@ import java.util.List;
 /**
  * Created by johnw on 3/14/2016.
  */
-public class customGrid extends ArrayAdapter<String> {
+public class CustomGrid extends ArrayAdapter<String> {
     private Context mContext;
     private List<String> url;
-    public customGrid(Context context, List<String> objects) {
+    public CustomGrid(Context context, List<String> objects) {
 
         super(context,android.R.layout.simple_list_item_1,objects);
     }

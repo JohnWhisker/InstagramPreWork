@@ -28,12 +28,12 @@ import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
 
-public class Showprofile extends AppCompatActivity {
+public class ShowProfile extends AppCompatActivity {
     String userid;
     GridView gvpost;
     User user ;
     private ArrayList<String> urllist;
-    private customGrid urladapter;
+    private CustomGrid urladapter;
     String CLIENT_ID = "e05c462ebd86446ea48a5af73769b602";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +41,7 @@ public class Showprofile extends AppCompatActivity {
         setContentView(R.layout.activity_showprofile);
         user = new User();
         urllist = new ArrayList<String>();
-        urladapter = new customGrid(this,urllist);
+        urladapter = new CustomGrid(this,urllist);
         gvpost = (GridView) findViewById(R.id.gvpost);
         gvpost.setAdapter(urladapter);
         if (savedInstanceState == null) {
@@ -93,6 +93,7 @@ public class Showprofile extends AppCompatActivity {
     private void fletchinfo(){
         String urlmedia = "https://api.instagram.com/v1/users/"+userid+"/media/recent/?client_id="+CLIENT_ID;
         String urluser = "https://api.instagram.com/v1/users/"+userid+"/?client_id="+CLIENT_ID;
+        Log.d("debug 2","url: "+ urluser);
         AsyncHttpClient getmedia = new AsyncHttpClient();
         AsyncHttpClient getuserinfo = new AsyncHttpClient();
         getmedia.get(urlmedia, null, new JsonHttpResponseHandler() {
@@ -148,7 +149,7 @@ public class Showprofile extends AppCompatActivity {
                             .cornerRadiusDp(30)
                             .oval(false)
                             .build();
-                        Picasso.with(Showprofile.this).load(user.profile_picture_url).fit().transform(transformation).into(ivava);
+                        Picasso.with(ShowProfile.this).load(user.profile_picture_url).fit().transform(transformation).into(ivava);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="1dp"
-    tools:context="com.example.johnw.instagramclient.comment_activity">
+    tools:context=".CommentActivity">
 
     <ListView
         android:layout_width="wrap_content"

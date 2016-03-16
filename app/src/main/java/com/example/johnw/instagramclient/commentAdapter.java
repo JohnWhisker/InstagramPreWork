@@ -24,8 +24,8 @@ import java.util.List;
 /**
  * Created by JohnWhisker on 3/13/16.
  */
-public class commentAdapter extends ArrayAdapter<Comment> {
-   public commentAdapter(Context context, List<Comment> objects) {
+public class CommentAdapter extends ArrayAdapter<Comment> {
+   public CommentAdapter(Context context, List<Comment> objects) {
 
         super(context,android.R.layout.simple_list_item_1,objects);
     }
