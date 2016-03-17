@@ -116,7 +116,6 @@ public class PhotoActivity extends AppCompatActivity {
                 JSONArray photosJSON = null;
                 try {
                     photosJSON = response.getJSONArray("data");
-                    photos.clear();
                     for (int i = 0; i < photosJSON.length(); i++) {
                         JSONObject photoJ = photosJSON.getJSONObject(i);
                         InstagramPhoto photo = new InstagramPhoto();

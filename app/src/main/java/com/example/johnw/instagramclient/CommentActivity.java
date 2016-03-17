@@ -52,7 +52,7 @@ public class CommentActivity extends AppCompatActivity {
         fletchComment();
         mediaInfomation();
     }
-    public void OnClick(View v){
+    public void onClick(View v){
         Intent intent = new Intent(this,ShowProfile.class);
         intent.putExtra("id", userid);
         startActivity(intent);
